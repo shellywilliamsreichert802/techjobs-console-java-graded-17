@@ -89,14 +89,52 @@ public class JobData {
      * @param value The search term to look for
      * @return      List of all jobs with at least one field containing the value
      */
+
+//    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+//
+//        // load data, if not already loaded
+//        loadData();
+
+//implement the findByValue method in the JobData class
+//    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+//        loadData();//method first loads the data, then iterates over each job in allJobs.
+//        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+//        for (HashMap<String, String> row : allJobs) { //For each job iterates over each value in the job's HashMap
+//            for (String aValue : row.values()) {
+//                if (aValue.toLowerCase().contains(value.toLowerCase())) { //if value has search term (case-insensitive), checks if job is already in jobs list
+//                    if (!jobs.contains(row)) {
+//                        jobs.add(row);
+//                    }
+//                    break;//if job is not in jobs list it adds the job to jobs list and breaks the inner loop thus each job is added only once to jobs list
+//                }
+//            }
+//        }
+//        return jobs;
+//    }
+        // TODO - implement this method
+    // Implement findByValue method in JobData class allows users to search all columns of the data for a given string, without returning duplicate jobs.
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
-        // load data, if not already loaded
+        // Load data, if not already loaded
         loadData();
+//method iterates over each job/row of data. For each job checks each column to see if data is found
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
-        // TODO - implement this method
-        return null;
+        for (HashMap<String, String> row : allJobs) {
+            for (String column : row.keySet()) {
+                String val = row.get(column);
+                // If data found, adds the job to the list and breaks out of the column checking loop to avoid adding duplicate jobs, Search is case-insensitive.
+                if (val.toLowerCase().contains(value.toLowerCase())) {
+                    jobs.add(row);
+                    break;  // Found a match, no need to check other columns in this row
+                }
+            }
+        }
+
+        return jobs;  // Return list of all jobs that contain the value
     }
+// commented out may need to add or sub above for jobs       return null;
+//    }
 
     /**
      * Read in data from a CSV file and store it in a list
@@ -137,6 +175,6 @@ public class JobData {
             System.out.println("Failed to load job data");
             e.printStackTrace();
         }
+        }
     }
 
-}
