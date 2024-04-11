@@ -51,14 +51,13 @@ public class TechJobs {
                         System.out.println(item);
                     }
                 }
-
             } else { // choice is "search"
 
                 // How does the user want to search (e.g. by skill or employer)
                 String searchField = getUserSelection("Search by:", columnChoices);
 
                 // What is their search term?
-                System.out.println("\nSearch term:");
+                System.out.println("\nSearch term:\n");
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
@@ -135,9 +134,25 @@ public class TechJobs {
             for (Map.Entry<String, String> entry : job.entrySet()) {
                 System.out.println(entry.getKey() + ": " + entry.getValue());
             }
-            System.out.println("*****\n"); //After printing all fields of job prints astericks line and newline to separate this job from next one. If new field added to job records, prints new field without updates to printJobs
+            System.out.println("*****"); //After printing all fields of job prints astericks line and newline to separate this job from next one. If new field added to job records, prints new field without updates to printJobs
+                break;
         }
     }
 
     // ... other methods ...
+    //If the line is being printed as part of a loop or conditional statement, you might need to adjust the logic of your program. For example, if you’re printing all elements of a list and you want to skip one, you could add a condition to skip that specific element.
+    //
+    //Here’s a simple example:
+    //
+    //Java
+    //
+    //List<String> lines = Arrays.asList("line 1", "line 2", "line 3");
+    //for (String line : lines) {
+    //    if (!line.equals("line 2")) {
+    //        System.out.println(line);
+    //    }
+    //}
+    //In this example, line 2 will not be printed because of the condition in the if statement.
+    //
+    //If you need more specific help, please provide the part of your code that generates the output you want to modify. 😊
 }
