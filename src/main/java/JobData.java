@@ -114,25 +114,41 @@ public class JobData {
         // TODO - implement this method
     // Implement findByValue method in JobData class allows users to search all columns of the data for a given string, without returning duplicate jobs.
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
-
         // Load data, if not already loaded
         loadData();
 //method iterates over each job/row of data. For each job checks each column to see if data is found
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
+            boolean matchFound = false;
             for (String column : row.keySet()) {
                 String val = row.get(column);
-                // If data found, adds the job to the list and breaks out of the column checking loop to avoid adding duplicate jobs, Search is case-insensitive.
                 if (val.toLowerCase().contains(value.toLowerCase())) {
-                    jobs.add(row);
+                    matchFound = true;
                     break;  // Found a match, no need to check other columns in this row
                 }
             }
+            if (matchFound) {
+                jobs.add(row);
+            }
         }
 
-        return jobs;  // Return list of all jobs that contain the value
+        return jobs;
     }
+
+//        for (HashMap<String, String> row : allJobs) {
+//            for (String column : row.keySet()) {
+//                String val = row.get(column);
+//                // If data found, adds the job to the list and breaks out of the column checking loop to avoid adding duplicate jobs, Search is case-insensitive.
+//                if (val.toLowerCase().contains(value.toLowerCase())) {
+//                    jobs.add(row);
+//                    break;  // Found a match, no need to check other columns in this row
+//                }
+//            }
+//        }
+//
+//        return jobs;  // Return list of all jobs that contain the value
+//    }
 // commented out may need to add or sub above for jobs       return null;
 //    }
 

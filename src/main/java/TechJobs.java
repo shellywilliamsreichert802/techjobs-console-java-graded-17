@@ -126,7 +126,7 @@ public class TechJobs {
 //    //Implement printJobs method
     public static void printJobs(ArrayList<HashMap<String, String>> jobs) {
         if (jobs.isEmpty()) { //check if jobs list is empty and print "No Results"
-            System.out.println("No Results");
+            System.out.print("No Results");//This will print the message without the trailing newline.
             return;
         }
         for (HashMap<String, String> job : jobs) { //If not empty iterate over each hob in jobs list. For each job print astericks line then iterate over each entry in the job's HashMap and print the key and value
