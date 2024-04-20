@@ -44,7 +44,7 @@ public class TechJobs {
 
                     ArrayList<String> results = JobData.findAll(columnChoice);
 
-                    System.out.println("\n*** All " + columnChoices.get(columnChoice) + " Values ***");
+                    System.out.print("\n*** All " + columnChoices.get(columnChoice) + " Values ***");
 
                     // Print list of skills, employers, etc
                     for (String item : results) {
@@ -62,8 +62,20 @@ public class TechJobs {
 
                 if (searchField.equals("all")) {
                     // Call findByValue when the user wants to search all columns
+//                    ArrayList<String> searchResults = JobData.findByValue(searchTerm);
+                    // Print jobs without printing the searchTerm
+//                    for (String job : searchResults) {
+//                        if (!job.contains(searchTerm)) {
+//                            System.out.println(job);
+                    // Call findByValue when the user wants to search all columns
                     printJobs(JobData.findByValue(searchTerm));
+
+//                } else if (searchField.isEmpty()) { //check if jobs list is empty and print "No Results"
+//                        System.out.print("SearchTerm:");//Remove ln  to print the message without the trailing newline.
+//                        return;
+
                 } else {
+//                    System.out.println("Search term:");
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
             }
@@ -126,18 +138,23 @@ public class TechJobs {
 //    //Implement printJobs method
     public static void printJobs(ArrayList<HashMap<String, String>> jobs) {
         if (jobs.isEmpty()) { //check if jobs list is empty and print "No Results"
-            System.out.print("No Results");//This will print the message without the trailing newline.
-            return;
-        }
-        for (HashMap<String, String> job : jobs) { //If not empty iterate over each hob in jobs list. For each job print astericks line then iterate over each entry in the job's HashMap and print the key and value
-            System.out.println("*****");
-            for (Map.Entry<String, String> entry : job.entrySet()) {
-                System.out.println(entry.getKey() + ": " + entry.getValue());
-            }
-            System.out.println("*****"); //After printing all fields of job prints astericks line and newline to separate this job from next one. If new field added to job records, prints new field without updates to printJobs
-                break;
+            System.out.print("No Results");//Remove ln  to print the message without the trailing newline.
+//            return;
+        } else {
+            for (HashMap<String, String> job : jobs) { //If not empty iterate over each job in jobs list. For each job print astericks line then iterate over each entry in the job's HashMap and print the key and value
+                System.out.println("*****");
+                // Iterate over each key-value pair in the job HashMap
+//        for (String key : job.keySet()) {
+//            System.out.println(key + ": " + job.get(key));
+//        }
+                for (Map.Entry<String, String> entry : job.entrySet()) {
+                    System.out.println(entry.getKey() + ": " + entry.getValue());
+                }
+                System.out.println("*****"); //After printing all fields of job prints astericks line and newline to separate this job from next one. If new field added to job records, prints new field without updates to printJobs
+            }//out.println
         }
     }
+}
 
     // ... other methods ...
     //If the line is being printed as part of a loop or conditional statement, you might need to adjust the logic of your program. For example, if you’re printing all elements of a list and you want to skip one, you could add a condition to skip that specific element.
@@ -153,6 +170,4 @@ public class TechJobs {
     //    }
     //}
     //In this example, line 2 will not be printed because of the condition in the if statement.
-    //
-    //If you need more specific help, please provide the part of your code that generates the output you want to modify. 😊
-}
+
