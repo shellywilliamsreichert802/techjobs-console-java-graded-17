@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -41,7 +38,8 @@ public class JobData {
                 values.add(aValue);
             }
         }
-
+//Bonus: Sort alphabetically
+        Collections.sort(values);
         return values;
     }
 
@@ -75,7 +73,12 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.toLowerCase().contains(value.toLowerCase())) {
+//            if(aValue.contains(value)) {
+//                jobs.add(row);
+
+//change to ignore case sensitivity, enhance search functionality
+//            if (aValue.toLowerCase().contains(value.toLowerCase())) {
+            if (aValue.equalsIgnoreCase(value)) {
                 jobs.add(row);
             }
         }
@@ -99,18 +102,20 @@ public class JobData {
 //implement the findByValue method in the JobData class
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
         loadData();//method first loads the data, then iterates over each job in allJobs.
-        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
-        for (HashMap<String, String> row : allJobs) { //For each job iterates over each value in the job's HashMap
-            for (String aValue : row.values()) {
-                if (aValue.toLowerCase().contains(value.toLowerCase())) { //if value has search term (case-insensitive), checks if job is already in jobs list
-                    if (!jobs.contains(row)) {
-                        jobs.add(row);
-                    }
+        ArrayList<HashMap<String, String>> foundJobs = new ArrayList<>();
+
+        for (HashMap<String, String> job : allJobs) { //For each job iterates over each value in the job's HashMap
+            boolean found = false; //flag if value found in any column
+            //Loop through each column in the job
+            for (Map.Entry<String, String> entry : job.entrySet()) {
+                //check if column value contains the search value, case insesitive
+                if (entry.getValue().toLowerCase().contains(value.toLowerCase())) { //if value has search term (case-insensitive), checks if job is already in jobs list
+                    foundJobs.add(job);
                     break;//if job is not in jobs list it adds the job to jobs list and breaks the inner loop thus each job is added only once to jobs list
                 }
             }
         }
-        return jobs;
+        return foundJobs;
     }
     // Implement findByValue method in JobData class allows users to search all columns of the data for a given string, without returning duplicate jobs.
 //    public static ArrayList<HashMap<String, String>> findByValue(String value) {
