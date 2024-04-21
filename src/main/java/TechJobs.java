@@ -10,7 +10,7 @@ public class TechJobs {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -111,7 +111,7 @@ public class TechJobs {
                     return null;
                 }
             }
-                /*boolean shouldQuit = line.equals("x"); if (shouldQuit) {*/
+            /*boolean shouldQuit = line.equals("x"); if (shouldQuit) {*/
             // Validate user's input
             //If the index is less than 0 or greater than or equal to the length of the available choices,
             // it prints an error message
@@ -122,7 +122,7 @@ public class TechJobs {
             }
 
             //while loop continues until valid choice = true.
-        } while(!validChoice);
+        } while (!validChoice);
         // Return the key corresponding to the user's choice
         return choiceKeys[choiceIdx];
     }
@@ -134,25 +134,37 @@ public class TechJobs {
 //            return;
         } else {
             for (HashMap<String, String> job : someJobs) {
-                String jobTitle = job.get("name");
-                String employer = job.get("employer");
-                String location = job.get("location");
-                String positionType = job.get("position type");
-                String coreCompetency = job.get("core competency");
-
                 System.out.println("\n*****");
-                System.out.println("position type: " + positionType);
-                System.out.println("name: " + jobTitle);
-                System.out.println("employer: " + employer);
-                System.out.println("location: " + location);
-                System.out.println("core competency: " + coreCompetency);
+                for (Map.Entry<String, String> entry : job.entrySet()) {
+                    System.out.println(entry.getKey() + ": " + entry.getValue());
+                }
                 System.out.println("*****");
+////                System.out.println();
             }
-
         }
-
     }
 }
+
+
+//                String jobTitle = job.get("name");
+//                String employer = job.get("employer");
+//                String location = job.get("location");
+//                String positionType = job.get("position type");
+//                String coreCompetency = job.get("core competency");
+//
+//                System.out.println("\n*****");
+//                System.out.println("position type: " + positionType);
+//                System.out.println("name: " + jobTitle);
+//                System.out.println("employer: " + employer);
+//                System.out.println("location: " + location);
+//                System.out.println("core competency: " + coreCompetency);
+//                System.out.println("*****");
+//            }
+//
+//        }
+//    }
+//}
+//}
 //            for (HashMap<String, String> job : someJobs) { //If not empty iterate over each job in jobs list. For each job print astericks line then iterate over each entry in the job's HashMap and print the key and value
 //                System.out.println("*****");
                 // Iterate over each key-value pair in the job HashMap
@@ -182,4 +194,3 @@ public class TechJobs {
     //    }
     //}
     //In this example, line 2 will not be printed because of the condition in the if statement.
-
